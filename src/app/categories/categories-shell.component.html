@@ -1,0 +1,18 @@
+<div class="panel panel-primary">
+  <mls-categories-list>
+    [errorMessage]="errorMessage$ | async"
+    [categories]="categories$ | async"
+    [selectedCategory]="selectedCategory$ | async"
+    [pageSize]="pageSize$ | async"
+    [categoriesCount]="categoriesCount$ | async"
+    [isBusy]="isBusy$ | async"
+    [currentPage]="currentPage$ | async"
+    (search)="filter($event)"
+    (pageSizeChange)="pageSizeChange($event)"
+    (categorySelected)="onSelected($any($event))"
+    (deleteCategory)="deleteCategory($event)"
+    (editCategory)="editCategory($any($event))"
+    (addCategory)="addShellCategory()">
+  </mls-categories-list>
+
+</div>

@@ -1,0 +1,61 @@
+<div  class="container-fluid pt-2">
+  <div class="d-flex flex-column" style="padding-top: 1rem;">
+    <div class="h-25">
+      <div class="wizard">
+        <a [routerLink]="['info']"
+          routerLinkActive="active">
+          Basic Information <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!isValid('info')" class="text-alert"></fa-icon>
+        </a>
+        <a [routerLink]="['tags']"
+          routerLinkActive="active">
+          Search Tags <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!isValid('tags')" class="text-alert"></fa-icon>
+        </a>
+        <a [routerLink]="['image']"
+          routerLinkActive="active">
+          Image <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!isValid('image')" class="text-alert"></fa-icon>
+        </a>
+        <a [routerLink]="['questions']"
+          routerLinkActive="active">
+          Questions <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!isValid('questions')" class="text-alert"></fa-icon>
+        </a>
+      </div>
+    </div>
+    <div class="h-50">
+      <div class="card">
+        <div class="card-header">{{subject?.name}}</div>
+        <div class="card-body">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-25">
+      <div class="d-flex p-3">
+        <div class="p-2">
+          <button class="btn btn-primary mr-3"
+          style="width:80px"
+          type="button"
+          [title]="isValid() ? 'Save your entered data' : 'Disabled until the form data is valid'"
+          [disabled]="!isValid()"
+          (click)="saveProduct()">Save</button>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-outline-secondary mr-3"
+          style="width:80px"
+          type="button"
+          title="Cancel your edits"
+          [routerLink]="['/subjects']">Cancel</button>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-outline-warning"
+          *ngIf="subject?.bodyOfKnowledgeId"
+          style="width:80px"
+          type="button"
+          title="Delete this product"
+          (click)="deleteProduct()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+</div>

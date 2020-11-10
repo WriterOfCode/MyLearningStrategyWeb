@@ -1,0 +1,70 @@
+<form novalidate #responseImageForm="ngForm">
+  <fieldset>
+    <div class="card">
+      <div class="card-header">
+        Question: {{response.response}}
+      </div>
+      <div class="card-body" *ngIf="response">
+        <div class="container">
+          <ngb-carousel
+          [showNavigationArrows]="true"
+          [showNavigationIndicators]="true"
+          interval="1200"
+          [keyboard]="true"
+          [pauseOnHover]="true"
+          [wrap]="true"
+          [activeId]="'secondSlide'">
+            <ng-template ngbSlide >
+              <div class="picsum-img-wrapper">
+                <img [src]="response.image_1_Cloud"  class="img-thumbnail mx-auto d-block"  style="min-height: 200px; max-height: 200px;">
+              </div>
+              <div class="carousel-caption">
+                <h3>First slide</h3>
+              </div>
+              <div style='vertical-align: bottom;' >
+                <input class="form-control"
+                id="Rimage1CloudId"
+                type="url"
+                name="Rimage1Cloud"
+                [(ngModel)]=response.image_1_Cloud
+                #Rimage1CloudIdVar="ngModel" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="picsum-img-wrapper">
+                <img [src]="response.image_2_Cloud"  class="img-thumbnail mx-auto d-block"  style="min-height: 200px; max-height: 200px;">
+              </div>
+              <div class="carousel-caption">
+                <h3>Second slide</h3>
+              </div>
+              <div style='vertical-align: bottom;' >
+                <input class="form-control"
+                id="Qimage2CloudId"
+                type="url"
+                name="Rimage2Cloud"
+                [(ngModel)]=response.image_2_Cloud
+                #Rimage2CloudIdVar="ngModel" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide >
+              <div class="picsum-img-wrapper">
+                <img [src]="response.image_3_Cloud" class="img-thumbnail mx-auto d-block"  style="min-height: 200px; max-height: 200px;">
+              </div>
+              <div class="carousel-caption">
+                <h3>Third slide</h3>
+              </div>
+              <div style='vertical-align: bottom;' >
+                <input class="form-control"
+                id="Rimage3CloudId"
+                type="url"
+                name="Rimage3Cloud"
+                [(ngModel)]=response.image_3_Cloud
+                #Rimage3CloudIdVar="ngModel" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

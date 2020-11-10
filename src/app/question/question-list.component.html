@@ -1,0 +1,119 @@
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <div class="container-fluid pt-2">
+        <div class="form-group form-inline">Full text search: <input class="form-control ml-2"
+          type="text" name="searchTermQuestion"
+          [(ngModel)]="questionListService.searchTerm"/>
+          <mat-spinner
+          diameter=25
+          strokeWidth=5
+          *ngIf="questionListService.loading$ | async"></mat-spinner>
+          <button class="btn btn-primary ml-auto"
+          style="width:80px"
+          type="button"
+          title="Add quesiton"
+          [routerLink]="[0,'edit']"
+          queryParamsHandling="preserve">Add</button>
+        </div>
+        <table class="table table-dark table-striped table-hover" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th colspan="2" scope="col" mLSQuesitonListSort="question" (sort)="onSort($event)" style="padding-left: 26px;">Question</th>
+              <th scope="col" mLSQuesitonListSort="mnemonic" (sort)="onSort($event)">Mnemonic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of questionListService.questions$ | async">
+              <td colspan="2">
+                <div *ngIf="question.image_1_Cloud || question.image_2_Cloud || question.image_3_Cloud">
+                  <ngb-carousel
+                  [showNavigationArrows]="false"
+                  [showNavigationIndicators]="false"
+                  interval="1200"
+                  [keyboard]="false"
+                  [pauseOnHover]="true"
+                  [wrap]="false"
+                  [style.height.px]="55"
+                  [style.margin.px]="2">
+                    <ng-template ngbSlide *ngIf="question.image_1_Cloud">
+                      <div class="picsum-img-wrapper">
+                        <img class="float-left img-responsive mr-2"
+                        [style.height.px]="48"
+                        [style.margin.px]="2"
+                        [src]="question.image_1_Cloud">
+                      </div>
+                    </ng-template>
+                    <ng-template ngbSlide *ngIf="question.image_2_Cloud">
+                      <div class="picsum-img-wrapper">
+                        <img class="float-left img-responsive mr-2"
+                        [style.height.px]="48"
+                        [style.margin.px]="2"
+                        [src]="question.image_2_Cloud">
+                      </div>
+                    </ng-template>
+                    <ng-template ngbSlide *ngIf="question.image_3_Cloud">
+                      <div class="picsum-img-wrapper">
+                        <img class="float-left img-responsive mr-2"
+                        [style.height.px]="48"
+                        [style.margin.px]="2"
+                        [src]="question.image_3_Cloud">
+                      </div>
+                    </ng-template>
+                  </ngb-carousel>
+                </div>
+                <div><ngb-highlight [result]="question.question"
+                  [term]="questionListService.searchTerm"
+                  style="word-break: keep-all; word-wrap: none;"></ngb-highlight></div>
+              </td>
+              <td>
+                <div ><ngb-highlight [result]="question.mnemonic"
+                   [term]="questionListService.searchTerm"
+                   style="word-break: keep-all; word-wrap: none;"></ngb-highlight></div>
+              </td>
+              <td>
+                <tr><a target="_blank" [href]='question.hyperlink_1'>Hyperlink 1</a></tr>
+                <tr><a target="_blank" [href]='question.hyperlink_2'>Hyperlink 1</a></tr>
+                <tr> <a target="_blank" [href]='question.hyperlink_3'>Hyperlink 1</a></tr>
+              </td>
+              <td>
+                <tr style="padding-bottom: 8px;">
+                  <div class="p-2">
+                    <button class="btn btn-primary"
+                    style="width:80px"
+                    type="button"
+                    title="Edit this quesiton"
+                    [routerLink]="[question.questionId,'edit']">Edit</button>
+                  </div>
+                </tr>
+                <tr style="padding-top: 8px;">
+                  <div class="p-2">
+                    <button class="btn btn-outline-warning"
+                    style="width:80px"
+                    type="button"
+                    title="Delete this question"
+                    (click)="deleteQuestion(question)">Delete</button>
+                  </div>
+                </tr>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="(questionListService.questionsCount$ | async)!"
+            [(page)]="questionListService.page"
+            [pageSize]="questionListService.pageSize">
+          </ngb-pagination>
+
+          <select class="custom-select" style="width: auto"
+            name="pageSize" [(ngModel)]="questionListService.pageSize">
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="30">30 items per page</option>
+            <option [ngValue]="60">60 items per page</option>
+            <option [ngValue]="100">100 items per page</option>
+          </select>
+        </div>
+    </div>
+  </div>
+</div>

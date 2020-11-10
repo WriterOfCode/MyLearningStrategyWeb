@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="subjectNameId">Upload file location:</label>
+    </div>
+    <div class="col-sm-6" >
+      <input class="form-control"
+      id="subjectNameId"
+      type="text"
+      size="65"
+      readonly
+      value="{{this.selectedFileName}}"
+       style="margin-left: 4px; margin-right:4px;"/></div>
+    <div class="col-sm-3" >
+      <button #buttonPicker="mLSFilePickerEx"
+      class="btn btn-outline-light " mLSFilePickerSel
+       [multiple]="alowMultiple"
+       (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()">
+       {{buttonText}}</button>
+    </div>
+  </div>
+</div>

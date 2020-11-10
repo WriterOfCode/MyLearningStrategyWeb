@@ -1,0 +1,100 @@
+<div  class="container-fluid pt-2">
+  <div class="d-flex flex-column" style="padding-top: 1rem;">
+    <div class="h-50">
+      <div class="card">
+        <div class="card-header">{{pageTitle}}</div>
+        <div class="card-body">
+          <form novalidate #subjectTagsForm="ngForm">
+            <fieldset>
+              <div class="form-group row" style="padding-left: 20px;">
+                <label class="col-md-2 col-form-label"
+                        for="strategyNameId">Strategy Name</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                          id="categoryNameId"
+                          type="text"
+                          placeholder="Name (required)"
+                          required
+                          minlength="3"
+                          maxlength="50"
+                          name="categoryName"
+                          [(ngModel)]="currentCategory.categoryName"
+                          #strategyNameVar="ngModel">
+                  <span class="invalid-feedback">
+                    <span *ngIf="strategyNameVar.errors?.required">
+                      Strategy name is required.
+                    </span>
+                    <span *ngIf="strategyNameVar.errors?.minlength">
+                      Strategy name must be at least three characters.
+                    </span>
+                    <span *ngIf="strategyNameVar.errors?.maxlength">
+                      Strategy name can have a maimum of 50 echaracters.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group row" style="padding-left: 20px;">
+                <label class="col-md-2 col-form-label"
+                        for="categoryImageId">Category Image</label>
+                <div class="col-md-8" *ngIf="currentCategory.imageCloud">
+                  <img class="center-block img-responsive "
+                    [style.height.px]="150"
+                    [style.margin.px]="2"
+                    [src]="currentCategory.imageCloud">
+
+                  <input class="form-control"
+                          id="categoryImageId"
+                          type="text"
+                          placeholder="Description"
+                          minlength="3"
+                          maxlength="50"
+                          name="strategyDescription"
+                          [(ngModel)]=currentCategory.imageDevice
+                          #strategyDescriptionVar="ngModel">
+                  <span class="invalid-feedback">
+                    <span *ngIf="strategyDescriptionVar.errors?.minlength">
+                      Strategy name must be at least three characters.
+                    </span>
+                    <span *ngIf="strategyDescriptionVar.errors?.maxlength">
+                      Strategy name can have a maimum of 50 echaracters.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-25">
+    <div class="d-flex p-3">
+      <div class="p-2">
+        <button class="btn btn-primary mr-3"
+        style="width:80px"
+        type="button"
+        [title]="isValid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+        [disabled]="!isValid"
+        (click)="onSave()">Save</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-outline-secondary mr-3"
+        style="width:80px"
+        type="button"
+        title="Cancel your edits"
+        onCancle
+        (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-outline-warning"
+        *ngIf="currentCategory.categoryId>0"
+        style="width:80px"
+        type="button"
+        title="Delete this category"
+        (click)="onDelete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

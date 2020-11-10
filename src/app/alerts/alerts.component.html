@@ -1,0 +1,8 @@
+<div *ngFor="let alert of alertsService.alerts">
+  <ngb-alert [type]="alert.type" (close)="close(alert)">
+    <strong>[{{alert.type}}] - {{alert.message}}</strong>
+    <div *ngIf="alert.debug"  class="bg-secondary text-white rounded-lg" style="overflow-wrap: normal">
+      <pre >{{alert.debug}}</pre>
+    </div>
+  </ngb-alert>
+</div>

@@ -1,0 +1,76 @@
+<div class="container-fluid pt-2">
+  <div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+    <div class="card-body" *ngIf="question">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-md-3">Question:</div>
+              <div class="col-md-6">{{question.question}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Description:</div>
+              <div class="col-md-6">{{question.mnemonic}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">Hyperlinks:</div>
+              <div class="col-md-6"><a target="_blank" [href]='question.hyperlink_1'></a></div>
+              <div class="col-md-6"><a target="_blank" [href]='question.hyperlink_2'></a></div>
+              <div class="col-md-6"><a target="_blank" [href]='question.hyperlink_3'></a></div>
+            </div>
+          </div>
+          <div class="col-sm-6" *ngIf="question">
+            <ngb-carousel
+            [showNavigationArrows]="true"
+            [showNavigationIndicators]="true"
+            interval="12000"
+            [keyboard]="true"
+            [pauseOnHover]="true"
+            [wrap]="true"
+            [activeId]="'secondSlide'">
+              <ng-template ngbSlide  *ngIf="question.image_1_Cloud">
+                <div class="picsum-img-wrapper">
+                  <img [src]="question.image_1_Cloud" alt="first slide" width="500" height="100">
+                </div>
+                <div class="carousel-caption">
+                  <h3>First slide</h3>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide *ngIf="question.image_2_Cloud">
+                <div class="picsum-img-wrapper">
+                  <img [src]="question.image_2_Cloud" alt="second slide" width="500" height="100">
+                </div>
+                <div class="carousel-caption">
+                  <h3>Second slide</h3>
+                </div>
+              </ng-template>
+              <ng-template ngbSlide *ngIf="question.image_3_Cloud">
+                <div class="picsum-img-wrapper">
+                  <img [src]="question.image_3_Cloud" alt="third slide" width="500" height="100">
+                </div>
+                <div class="carousel-caption">
+                  <h3>Third slide</h3>
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-outline-light mr-3"
+              style="width:80px"
+              [routerLink]="['edit/questions']"
+              queryParamsHandling="preserve">
+              <i class="fa fa-chevron-left"></i>Back</button>
+      <button class="btn btn-outline-primary"
+              style="width:80px"
+              [routerLink]="['/editquestion',
+              +question.bodyOfKnowledgeId,
+               +question.questionId]">Edit</button>
+    </div>
+  </div>
+</div>

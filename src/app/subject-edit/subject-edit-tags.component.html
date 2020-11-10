@@ -1,0 +1,55 @@
+ <form novalidate #subjectTagsForm="ngForm">
+  <fieldset>
+    <div class="form-group row no-gutters primary" >
+      <label class="col-md-1 col-form-label"
+      for="categoireiesId">Categories</label>
+      <div class="col-md-8 primary">
+        <mat-form-field matNativeControl id="categoireiesId" class="form-control primary" style="min-height: 50px;">
+          <mat-select name="categoriesSelector" [(ngModel)]="subject.categoryIds" multiple>
+            <mat-option *ngFor="let category of categoriesList" [value]="category.categoryId">{{category.categoryName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-1 col-form-label"
+            for="tagsId">New Tags</label>
+      <div class="col-md-8">
+        <input class="form-control"
+              id="tagsId"
+              type="text"
+              placeholder="Search keywords separated by commas"
+              [(ngModel)]="newTags"
+              name="tags" />
+      </div>
+      <div class="col-md-1">
+        <button class="btn btn-outline-primary"
+                type="button"
+                title="Enter the search keywords separated by commas and then press Add"
+                (click)="addTags()">
+          Add
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-1 col-form-label"
+      for="keywordsId">Tags</label>
+      <div class="col-md-8">
+        <span *ngFor="let tag of tags; let i = index" style="flex-wrap: wrap;">
+          <button id="tagKeyword" class="btn  btn-primary"
+                  style="font-size:smaller;margin-bottom:12px;margin-right:4px"
+                  title="Click to remove this tag"
+                  (click)="removeTag(i)">
+            {{tag}}
+            <span class="fa fa-times-circle"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+<div class='alert alert-danger'
+     *ngIf='errorMessage'>{{errorMessage}}
+</div>

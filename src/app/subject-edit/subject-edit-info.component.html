@@ -1,0 +1,68 @@
+<form novalidate #subjectInfoForm="ngForm">
+  <fieldset>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                  for="subjectNameId">Subject Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                    id="subjectNameId"
+                    type="text"
+                    placeholder="Name (required)"
+                    required
+                    minlength="3"
+                    maxlength="50"
+                    name="subjectName"
+                    [(ngModel)]=subject.name
+                    #subjectNameVar="ngModel"
+                    [ngClass]="{'is-invalid': (subjectNameVar.touched ||
+                                              subjectNameVar.dirty ||
+                                              subject.bodyOfKnowledgeId !== 0) &&
+                                              !subjectNameVar.valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="subjectNameVar.errors?.required">
+                Subject name is required.
+              </span>
+              <span *ngIf="subjectNameVar.errors?.minlength">
+                Subject name must be at least three characters.
+              </span>
+              <span *ngIf="subjectNameVar.errors?.maxlength">
+                Subject name can have a maimum of 50 echaracters.
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                  for="descriptionId">Description</label>
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="descriptionId"
+                      placeholder="Description"
+                      rows=3
+                      [(ngModel)]=subject.description
+                      name="subjectDescription"
+                      #subjectDescriptionVar="ngModel"
+                      [ngClass]="{'is-invalid': (subjectDescriptionVar.touched ||
+                                                  subjectDescriptionVar.dirty ||
+                                                  subject.bodyOfKnowledgeId !== 0) &&
+                                                  !subjectDescriptionVar.valid }" >
+                    </textarea>
+          </div>
+        </div>
+        <div class="form-group row" style="padding-left: 10pt;">
+          <div class="custom-control custom-switch">
+            <input class="custom-control-input"
+            id="switchShareId"
+            type="checkbox"
+            [(ngModel)]=subject.isShared
+            name="switchShare"
+            #switchShareVar="ngModel">
+            <label class="custom-control-label" for="switchShareId">Shared</label>
+          </div>
+        </div>
+  </fieldset>
+</form>
+
+<div class='alert alert-danger'
+ *ngIf='errorMessage'>{{errorMessage}}
+</div>

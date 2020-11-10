@@ -1,0 +1,50 @@
+<div  class="container-fluid pt-2">
+  <div class="d-flex flex-column">
+    <div class="h-25">
+      <div class="wizard">
+        <a [routerLink]="['info']"
+          routerLinkActive="active">
+          Basic Information<span [ngClass]="{'fa fa-exclamation': !isValid('info')}"></span>
+        </a>
+        <a [routerLink]="['image']"
+            routerLinkActive="active">
+          Image<span [ngClass]="{'fa fa-exclamation': !isValid('image')}"></span>
+        </a>
+        <a [routerLink]="['responses',question.questionId]"
+          routerLinkActive="active">
+          Responses<span [ngClass]="{'fa fa-exclamation': !isValid('responses')}"></span>
+        </a>
+      </div>
+    </div>
+    <div class="h-50">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="h-25" >
+      <div class="d-flex p-3">
+        <div class="p-2">
+          <button class="btn btn-primary mr-3"
+          style="width:80px"
+          type="button"
+          [title]="isValid() ? 'Save your entered data' : 'Please correct any validation errors to save.'"
+          [disabled]="!isValid()"
+          (click)="saveQuestion()">Save</button>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-outline-secondary mr-3"
+          style="width:80px"
+          title="Cancel your edits."
+          [routerLink]="['/questions']"
+          queryParamsHandling="preserve">Cancel</button>
+        </div>
+        <div class="p-2">
+          <button class="btn btn-outline-warning"
+          style="width:80px"
+          type="button"
+          title="Delete this question."
+          (click)="deleteQuestion()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+</div>

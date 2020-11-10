@@ -1,0 +1,9 @@
+<form novalidate #subjectImageForm="ngForm">
+  <mls-input-file  (selectedFilesChanged)="_onFilesChanged($event)" ></mls-input-file>
+  <fieldset>
+    <mat-divider></mat-divider>
+    <figure *ngIf="subject" style="padding: 20px;">
+      <img [src]="this.imageSrc" class="img-thumbnail mx-auto d-block" style="max-width: 450px; padding: 5pt;">
+    </figure>
+  </fieldset>
+</form>
